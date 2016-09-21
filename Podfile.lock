@@ -1,0 +1,16 @@
+PODS:
+  - GMPage (0.1.0)
+
+DEPENDENCIES:
+  - GMPage (from `./`)
+
+EXTERNAL SOURCES:
+  GMPage:
+    :path: ./
+
+SPEC CHECKSUMS:
+  GMPage: d12e89ba3c89eb74deb5305ab471d3a53683421a
+
+PODFILE CHECKSUM: 1ea9a12cb42afffcf0c4e01ef91e7b4838053080
+
+COCOAPODS: 1.1.0.rc.2
