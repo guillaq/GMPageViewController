@@ -18,7 +18,7 @@ public class PageViewController: UIViewController {
     
     public weak var delegate: PageViewControllerDelegate?
     
-    fileprivate(set) weak var visibleViewController: UIViewController?
+    public fileprivate(set) weak var visibleViewController: UIViewController?
     
     fileprivate var beforeViewController: UIViewController?
     
