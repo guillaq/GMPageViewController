@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'GMPage'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'Drop in replacement for UIPageViewController with additional features'
   s.homepage         = 'https://github.com/gdollardollar/gmpageviewcontroller'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

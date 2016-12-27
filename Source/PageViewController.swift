@@ -41,13 +41,13 @@ public class PageViewController: UIViewController {
     }
     
     /**
-    Sets the visible view controller.
-    
-    :param: viewController the new view controller
-    :param: direction      the direction
-    :param: animated       true if animated
-    :param: completion     the completion block that will be called only if animated
-    */
+     Sets the visible view controller.
+     
+     :param: viewController the new view controller
+     :param: direction      the direction
+     :param: animated       true if animated
+     :param: completion     the completion block that will be called only if animated
+     */
     public func setViewController(_ viewController: UIViewController?, direction: UIPageViewControllerNavigationDirection = .forward, animated: Bool = true, completion:((Bool) -> Void)? = nil) {
         
         let current = visibleViewController
@@ -80,9 +80,9 @@ public class PageViewController: UIViewController {
                 
                 self.setTransform(direction == .forward ? -1 : 1)
                 
-                }, completion: { (f) -> Void in
-                    finish()
-                    completion?(f)
+            }, completion: { (f) -> Void in
+                finish()
+                completion?(f)
             })
         } else {
             finish()
@@ -93,7 +93,7 @@ public class PageViewController: UIViewController {
 extension PageViewController: UIGestureRecognizerDelegate {
     
     fileprivate func addAnimationLayer(_ controller: UIViewController) -> CALayer {
-
+        
         let layer = CALayer()
         layer.frame = visibleViewController!.view.layer.frame
         
@@ -122,7 +122,7 @@ extension PageViewController: UIGestureRecognizerDelegate {
         if let pan = gestureRecognizer as? UIPanGestureRecognizer {
             if self.dataSource == nil || self.visibleViewController == nil {
                 return false
-            } else {
+            } else if delegate?.pageViewController(self, panGestureRecognizerShouldBegin: pan) ?? true {
                 
                 let width = self.view.bounds.width
                 
@@ -146,14 +146,12 @@ extension PageViewController: UIGestureRecognizerDelegate {
                 if beforeViewController == nil && afterViewController == nil {
                     return false
                 } else {
-                    if delegate?.pageViewController(self, panGestureRecognizerShouldBegin: pan) ?? true {
-                        return true
-                    } else {
-                        beforeViewController = nil
-                        afterViewController = nil
-                        return false
-                    }
+                    return true
                 }
+            } else {
+                beforeViewController = nil
+                afterViewController = nil
+                return false
             }
         }
         return true
@@ -236,7 +234,7 @@ extension PageViewController: UIGestureRecognizerDelegate {
             afterViewController?.willMove(toParentViewController: nil)
             
             UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
-                            self.setTransform(finalTx/width)
+                self.setTransform(finalTx/width)
             }, completion: { (f) -> Void in
                 for vc in [self.beforeViewController, self.visibleViewController, self.afterViewController] {
                     if vc != nil && vc! != newVisible {
