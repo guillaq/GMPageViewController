@@ -161,7 +161,7 @@ extension PageViewController: UIGestureRecognizerDelegate {
         delegate?.pageViewController(self, applyTransformsTo: beforeViewController, visible: visibleViewController, after: afterViewController, forProgress: progress)
     }
     
-    open func panRecognized(_ sender: UIPanGestureRecognizer) {
+    @objc open func panRecognized(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
             
