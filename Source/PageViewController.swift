@@ -165,9 +165,9 @@ extension PageViewController: UIGestureRecognizerDelegate {
         switch sender.state {
         case .began:
             
-            let handleVC: (UIViewController!) -> () =  { vc in
+            let handleVC: (UIViewController?) -> () =  {
                 
-                if vc != nil {
+                if let vc = $0 {
                     self.addChildViewController(vc)
                     vc.view.frame = self.view.bounds
                     self.view.addSubview(vc.view)
