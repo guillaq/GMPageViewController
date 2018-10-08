@@ -48,13 +48,13 @@ public class PageViewController: UIViewController {
      :param: animated       true if animated
      :param: completion     the completion block that will be called only if animated
      */
-    public func setViewController(_ viewController: UIViewController?, direction: UIPageViewControllerNavigationDirection = .forward, animated: Bool = true, completion:((Bool) -> Void)? = nil) {
+    public func setViewController(_ viewController: UIViewController?, direction: UIPageViewController.NavigationDirection = .forward, animated: Bool = true, completion:((Bool) -> Void)? = nil) {
         
         let current = visibleViewController
-        current?.willMove(toParentViewController: nil)
+        current?.willMove(toParent: nil)
         
         if viewController != nil {
-            self.addChildViewController(viewController!)
+            self.addChild(viewController!)
             viewController!.view.frame = self.view.bounds
             viewController!.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.view.addSubview(viewController!.view)
@@ -62,9 +62,9 @@ public class PageViewController: UIViewController {
         
         let finish: () -> () = {
             current?.view.removeFromSuperview()
-            current?.removeFromParentViewController()
+            current?.removeFromParent()
             
-            viewController?.didMove(toParentViewController: self)
+            viewController?.didMove(toParent: self)
             
             self.visibleViewController = viewController
         }
@@ -168,10 +168,10 @@ extension PageViewController: UIGestureRecognizerDelegate {
             let handleVC: (UIViewController?) -> () =  {
                 
                 if let vc = $0 {
-                    self.addChildViewController(vc)
+                    self.addChild(vc)
                     vc.view.frame = self.view.bounds
                     self.view.addSubview(vc.view)
-                    vc.didMove(toParentViewController: self)
+                    vc.didMove(toParent: self)
                 }
             }
             
@@ -230,8 +230,8 @@ extension PageViewController: UIGestureRecognizerDelegate {
                 delegate?.pageViewController(self, willTransitionFrom: oldVisible, to: newVisible)
             }
             
-            beforeViewController?.willMove(toParentViewController: nil)
-            afterViewController?.willMove(toParentViewController: nil)
+            beforeViewController?.willMove(toParent: nil)
+            afterViewController?.willMove(toParent: nil)
             
             UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
                 self.setTransform(finalTx/width)
@@ -239,7 +239,7 @@ extension PageViewController: UIGestureRecognizerDelegate {
                 for vc in [self.beforeViewController, self.visibleViewController, self.afterViewController] {
                     if vc != nil && vc! != newVisible {
                         vc!.view.removeFromSuperview()
-                        vc!.removeFromParentViewController()
+                        vc!.removeFromParent()
                     }
                 }
                 
