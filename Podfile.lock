@@ -1,5 +1,5 @@
 PODS:
-  - GMPage (1.0.1)
+  - GMPage (1.0.3)
 
 DEPENDENCIES:
   - GMPage (from `./`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  GMPage: 7309b7b02c8b8af50b6ba2441fc1f7752dcd481b
+  GMPage: 8c622627faba18eaa2892b81bc308f174e7d3c97
 
 PODFILE CHECKSUM: ea3d79fd0cd1718a909385c5bf7c64d94c3d6d50
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.2

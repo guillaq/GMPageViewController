@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol PageViewControllerDelegate: class {
-    
+
     /**
      Called in CATransaction block to apply transforms. If not implemented or returns false, an horizontal animation is used
      
@@ -22,7 +22,7 @@ public protocol PageViewControllerDelegate: class {
      :returns: true if did set the transforms
      */
     func pageViewController(_ pageViewController: PageViewController, applyTransformsTo before: UIViewController?, visible: UIViewController?, after: UIViewController?, forProgress progress: CGFloat)
-    
+
     /**
      Propagation the gestureRecognizerShouldBegin method, return false if you don't want the recognizer to start
      
@@ -32,35 +32,34 @@ public protocol PageViewControllerDelegate: class {
      :returns: true if it should begin
      */
     func pageViewController(_ pageViewController: PageViewController, panGestureRecognizerShouldBegin gestureRecognizer: UIPanGestureRecognizer) -> Bool
-    
+
     func pageViewController(_ pageViewController: PageViewController, willStartPanWith before: UIViewController?, visible: UIViewController?, after: UIViewController?)
-    
+
     func pageViewController(_ pageViewController: PageViewController, willTransitionFrom fromViewController: UIViewController, to: UIViewController)
-    
+
     func pageViewController(_ pageViewController: PageViewController, didTransitionFrom fromViewController: UIViewController, to: UIViewController)
 }
 
 extension PageViewControllerDelegate {
-    
-    
+
     public func pageViewController(_ pageViewController: PageViewController, applyTransformsTo before: UIViewController?, visible: UIViewController?, after: UIViewController?, forProgress progress: CGFloat) {
-        
+
         let width = pageViewController.view.bounds.width
         before?.view.layer.transform = CATransform3DMakeTranslation(width * (progress - 1), 0, 0)
         visible?.view.layer.transform = CATransform3DMakeTranslation(width * progress, 0, 0)
         after?.view.layer.transform = CATransform3DMakeTranslation(width * (progress + 1), 0, 0)
 
     }
-    
+
     public func pageViewController(_ pageViewController: PageViewController, panGestureRecognizerShouldBegin gestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true
     }
-    
+
     public func pageViewController(_ pageViewController: PageViewController, willStartPanWith before: UIViewController?, visible: UIViewController?, after: UIViewController?) {
     }
-    
+
     public func pageViewController(_ pageViewController: PageViewController, willTransitionFrom fromViewController: UIViewController, to: UIViewController) {}
-    
+
     public func pageViewController(_ pageViewController: PageViewController, didTransitionFrom fromViewController: UIViewController, to: UIViewController) {}
-    
+
 }

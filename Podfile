@@ -4,7 +4,5 @@ use_frameworks!
 workspace 'GMPage'
 
 target 'Example' do
-
-  pod 'GMPage', :path => './'
-  
+  pod 'GMPage', path: './'
 end
